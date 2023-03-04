@@ -27,7 +27,7 @@ Container network and IP access on MacOS
 ./docker-net.sh -H
 
 ```
-### Usage
+## Usage
 ```
 Usage: docker-net.sh [OPTIONS]
 
@@ -39,3 +39,7 @@ Options:
     -H    Update container entries in /etc/hosts
     -l    Update /etc/hosts entries and lo0 alias (not recommended)
 ```
+## Credits
+ix.ai/openvpn
+wojas/docker-mac-network
+kylemanna/docker-openvpn

@@ -40,6 +40,6 @@ Options:
     -l    Update /etc/hosts entries and lo0 alias (not recommended)
 ```
 ## Credits       
-- [ix.ai/openvpn](https://github.com/ix-ai/openvpn)
+- [ix-ai/openvpn](https://github.com/ix-ai/openvpn)
 - [wojas/docker-mac-network](https://github.com/wojas/docker-mac-network)
 - [kylemanna/docker-openvpn](https://github.com/kylemanna/docker-openvpn)

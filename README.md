@@ -1,12 +1,11 @@
 # Mac Docker Networking
-Container network access on MacOS
+Container network and IP access on MacOS
 
 ## Features
-- Includes proxy and openvpn server
-- Generates openvpn client configuration
-- Access containers by IP address
-- Adds container entries to /etc/hosts
-- Works with Apple silicon
+- Proxy and openvpn server
+- Openvpn client config generation
+- Container access by name or IP address
+- Apple silicon support
 
 ## Prerequisites
 - [Colima](https://github.com/abiosoft/colima)
@@ -34,10 +33,10 @@ Container network access on MacOS
 Usage: docker-net.sh [OPTIONS]
 
 Options: 
+    -h    This help message
     -b    Build openvpn and proxy
     -s    Start [default]
     -x    Stop
-    -H    Add/update container entries to /etc/hosts
-    -h    Help message
+    -H    Update container entries in /etc/hosts
     -l    Update /etc/hosts entries and lo0 alias (not recommended)
 ```

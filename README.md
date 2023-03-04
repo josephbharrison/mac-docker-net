@@ -1,14 +1,17 @@
 # Mac Docker Networking
-Provides IP network access to docker containers and manages container /etc/hosts entries on Mac OS X.
+IP access to containers on MacOS. Works with Apple silicon.
 
 ### Prerequisites
 - [Colima](https://github.com/abiosoft/colima)
 - [Tunnelblick](https://tunnelblick.net)
 
 ### Installation
-- `$ ./docker-net.sh -b  # build`
-- `$ ./docker-net.sh -s  # start`
-- import openvpn profile to tunnelblick: `compose/docker-mac-net.ovpn`
+1. Build openvpn and proxy and start
+```sh
+./docker-net.sh -b  # build
+./docker-net.sh -s  # start
+```
+2. import openvpn profile to tunnelblick: `compose/docker-mac-net.ovpn`
 
 ### Usage
 ```

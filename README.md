@@ -2,9 +2,9 @@
 Container network and IP access on MacOS
 
 ## Features
-- Proxy and openvpn server
-- Openvpn profile generation
 - Container access by name or IP address
+- Proxy and openvpn servers included
+- Openvpn profile generation
 - Apple silicon support
 - Does not require `Docker Desktop for Mac`
 

@@ -9,13 +9,13 @@ Container network and IP access on MacOS
 - Does not require `Docker Desktop for Mac`
 
 ## Prerequisites
-- [Colima](https://github.com/abiosoft/colima)(Recommended)
+- [Colima](https://github.com/abiosoft/colima) (Recommended)
 - [Tunnelblick](https://tunnelblick.net)
 
 ## Installation (one-time setup)
 1. Install Prerequisites
 ```sh
-brew install colima tunnelblick`
+brew install colima tunnelblick
 ```
 2. Update Colima configuration
 ```yaml

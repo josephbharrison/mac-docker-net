@@ -10,7 +10,7 @@ Container network and IP access on MacOS
 
 ## Prerequisites
 - [Colima](https://github.com/abiosoft/colima) (Recommended)
-- [Tunnelblick](https://tunnelblick.net)
+- [Tunnelblick](https://tunnelblick.net) or any OpenVPN client
 
 ## Installation (one-time setup)
 1. Install Prerequisites

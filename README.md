@@ -6,27 +6,40 @@ Container network and IP access on MacOS
 - Openvpn client config generation
 - Container access by name or IP address
 - Apple silicon support
+- Does not require `Docker Desktop for Mac`
 
 ## Prerequisites
-- [Colima](https://github.com/abiosoft/colima)
+- [Colima](https://github.com/abiosoft/colima)(Recommended)
 - [Tunnelblick](https://tunnelblick.net)
 
-## Installation
-1. Build proxy and openvpn servers
+## Installation (one-time setup)
+1. Install Prerequisites
+```sh
+brew install colima tunnelblick`
+```
+2. Update Colima configuration
+```yaml
+# ~/.colima/default/colima.yaml
+docker:
+  default-address-pools:
+    - base: 172.16.32.0/20
+      size: 24
+  experimental: false
+```
+3. Start Colima
+```sh
+colima start
+```
+4. Build proxy and openvpn servers
 ```sh
 ./docker-net.sh -b
 ```
-2. Start the proxy and openvpn servers 
+5. Start the proxy and openvpn servers 
 ```sh
 ./docker-net.sh -s
 ```
-3. Add the generated openvpn profile to tunnelblick: `compose/docker-for-mac.ovpn`
-4. Use tunnelblick to connect to `docker-for-mac`
-5. Update `/etc/hosts`
-```sh
-./docker-net.sh -H
+6. Add the generated openvpn profile to tunnelblick: `compose/docker-for-mac.ovpn`
 
-```
 ## Usage
 ```
 Usage: docker-net.sh [OPTIONS]

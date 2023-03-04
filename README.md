@@ -23,7 +23,7 @@ Container network access on MacOS
 ```
 3. Add the generated openvpn profile to tunnelblick: `compose/docker-mac-net.ovpn`
 4. Use tunnelblick to connect to `mac-docker-net`
-5. Update `/etc/hosts`:
+5. Update `/etc/hosts`
 
 ```sh
 ./docker-net.sh -H

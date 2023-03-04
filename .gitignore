@@ -1,0 +1,8 @@
+.DS_Store
+playbook.retry
+inventory
+ansible.cfg
+venv/
+docker-for-mac.ovpn
+docker-for-mac.s4account
+*.pem

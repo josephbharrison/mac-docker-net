@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+    proxy:
+        container_name: proxy.${PROJECT}
+        build: .
+        ports:
+            - "127.0.0.1:13194:13194"
+        command: TCP-LISTEN:13194,fork TCP:172.16.33.1:1194
+        restart: always
+
+    openvpn:
+        container_name: openvpn.${PROJECT}
+        image: openvpn
+        volumes:
+            - .:/local
+            - ./config:/etc/openvpn
+        network_mode: host
+        cap_add:
+            - NET_ADMIN
+        environment:
+            dest: docker-for-mac.ovpn
+            DEBUG: '1'
+        command: /local/helpers/run.sh
+        restart: always
+
+networks:
+  default:
+    name: ${PROJECT}

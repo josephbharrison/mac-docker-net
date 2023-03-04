@@ -1,0 +1,8 @@
+networks:
+  mac-docker-net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.33.0/24
+          gateway: 172.16.33.1

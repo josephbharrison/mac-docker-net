@@ -29,7 +29,8 @@ Options:
 fi
 
 
-[[ $(uname -a | grep -c "arm64") -gt 0 ]] &&  export DOCKER_DEFAULT_PLATFORM=linux/amd64 
+# [[ $(uname -a | grep -c "arm64") -gt 0 ]] &&  export DOCKER_DEFAULT_PLATFORM=linux/amd64 
+[[ $(uname -a | grep -c "arm64") -gt 0 ]] &&  export DOCKER_DEFAULT_PLATFORM=linux/arm64 
 
 if [[ $opt == "-H" || $opt == "-l" ]];then
 

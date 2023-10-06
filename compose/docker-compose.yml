@@ -26,4 +26,7 @@ services:
 
 networks:
   default:
+    external: true
     name: ${PROJECT}
+    driver_opts:
+      com.docker.network.driver.mtu: 1500

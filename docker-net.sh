@@ -18,6 +18,7 @@ if [[ -z "$opt" || $opt == "-h" || $opt == "--help" ]];then
 Usage: docker-net.sh [OPTIONS]
 
 Options:
+    -i    Install
     -b    Build
     -s    Start
     -x    Stop
@@ -28,9 +29,8 @@ Options:
   exit 0
 fi
 
-
-# [[ $(uname -a | grep -c "arm64") -gt 0 ]] &&  export DOCKER_DEFAULT_PLATFORM=linux/amd64 
-[[ $(uname -a | grep -c "arm64") -gt 0 ]] &&  export DOCKER_DEFAULT_PLATFORM=linux/arm64 
+# [[ $(uname -a | grep -c "arm64") -gt 0 ]] &&  export DOCKER_DEFAULT_PLATFORM=linux/amd64
+[[ $(uname -a | grep -c "arm64") -gt 0 ]] &&  export DOCKER_DEFAULT_PLATFORM=linux/arm64
 
 if [[ $opt == "-H" || $opt == "-l" ]];then
 
@@ -51,7 +51,7 @@ if [[ $opt == "-H" || $opt == "-l" ]];then
     fi
   done
 
-  ## uncomment line below if '-b' does not execute as root 
+  ## uncomment line below if '-b' does not execute as root
   #ansible-playbook -i inventory playbook.yml --sudo
   ansible-playbook -i inventory playbook.yml -b
 
@@ -59,22 +59,36 @@ fi
 
 export PROJECT=mac-docker-net
 
-if [[ $opt == "-b" ]];then
+# Setup Colima
+if [[ $opt == "-i" ]];then
+    colima stop &> /dev/null
+    brew install colima || brew reinstall colima
+    colima stop &> /dev/null
+    mkdir -p ~/.colima/default
+    cp extras/colima.yaml ~/.colima/default/
+    brew install colima
+    colima start
+fi
+
+# Build openvpn and configure network
+if [[ $opt == "-b" || $opt == "-i" ]];then
   (
     cd openvpn
     docker buildx build . -t openvpn
   )
-  cd compose 
+  cd compose
   test=$(docker network inspect $PROJECT &> /dev/null)
   [[ $? -gt 0 ]] && docker network create --subnet "172.16.33.0/24" --gateway "172.16.33.1" $PROJECT
   docker compose -f docker-network.yml -f docker-compose.yml -p $PROJECT build
 fi
 
-if [[ $opt == "-s" ]];then
+# Start docker network
+if [[ $opt == "-s" || $opt == "-i" ]];then
   cd compose
   docker compose -f docker-network.yml -f docker-compose.yml -p $PROJECT up -d
 fi
 
+# Stop docker network
 if [[ $opt == "-x" ]];then
   cd compose
   docker compose -f docker-network.yml -f docker-compose.yml -p $PROJECT stop

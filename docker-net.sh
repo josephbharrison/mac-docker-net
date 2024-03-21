@@ -63,6 +63,7 @@ export PROJECT=mac-docker-net
 if [[ $opt == "-i" ]];then
     colima stop &> /dev/null
     brew install colima || brew reinstall colima
+    brew install docker
     colima stop &> /dev/null
     mkdir -p ~/.colima/default
     cp extras/colima.yaml ~/.colima/default/

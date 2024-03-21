@@ -64,6 +64,7 @@ if [[ $opt == "-i" ]];then
     colima stop &> /dev/null
     brew install colima || brew reinstall colima
     brew install docker
+    brew install docker-buildx
     colima stop &> /dev/null
     mkdir -p ~/.colima/default
     cp extras/colima.yaml ~/.colima/default/

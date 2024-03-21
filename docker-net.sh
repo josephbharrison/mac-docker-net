@@ -65,8 +65,10 @@ if [[ $opt == "-i" ]];then
     brew install colima || brew reinstall colima
     brew install docker
     brew install docker-buildx
+    brew install docker-compose
     mkdir -p ~/.docker/cli-plugins
     ln -sfn $(which docker-buildx) ~/.docker/cli-plugins/docker-buildx
+    ln -sfn $(which docker-compose) ~/.docker/cli-plugins/docker-compose
     colima stop &> /dev/null
     mkdir -p ~/.colima/default
     cp extras/colima.yaml ~/.colima/default/

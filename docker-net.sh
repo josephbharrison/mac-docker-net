@@ -59,22 +59,22 @@ fi
 
 export PROJECT=mac-docker-net
 
-# Setup Colima
-if [[ $opt == "-i" ]];then
-    colima stop &> /dev/null
-    brew install colima || brew reinstall colima
-    brew install docker
-    brew install docker-buildx
-    brew install docker-compose
-    mkdir -p ~/.docker/cli-plugins
-    ln -sfn $(which docker-buildx) ~/.docker/cli-plugins/docker-buildx
-    ln -sfn $(which docker-compose) ~/.docker/cli-plugins/docker-compose
-    colima stop &> /dev/null
-    mkdir -p ~/.colima/default
-    cp extras/colima.yaml ~/.colima/default/
-    brew install colima
-    colima start
-fi
+# # Setup Colima
+# if [[ $opt == "-i" ]];then
+#     colima stop &> /dev/null
+#     brew install colima || brew reinstall colima
+#     brew install docker
+#     brew install docker-buildx
+#     brew install docker-compose
+#     mkdir -p ~/.docker/cli-plugins
+#     ln -sfn $(which docker-buildx) ~/.docker/cli-plugins/docker-buildx
+#     ln -sfn $(which docker-compose) ~/.docker/cli-plugins/docker-compose
+#     colima stop &> /dev/null
+#     mkdir -p ~/.colima/default
+#     cp extras/colima.yaml ~/.colima/default/
+#     brew install colima
+#     colima start
+# fi
 
 # Build openvpn and configure network
 if [[ $opt == "-b" || $opt == "-i" ]];then
@@ -82,7 +82,7 @@ if [[ $opt == "-b" || $opt == "-i" ]];then
     cd openvpn
     docker buildx build . -t openvpn
   )
-  cd compose
+  [[ -d compose ]] && cd compose
   test=$(docker network inspect $PROJECT &> /dev/null)
   [[ $? -gt 0 ]] && docker network create --subnet "172.16.33.0/24" --gateway "172.16.33.1" $PROJECT
   docker compose -f docker-network.yml -f docker-compose.yml -p $PROJECT build
@@ -90,13 +90,13 @@ fi
 
 # Start docker network
 if [[ $opt == "-s" || $opt == "-i" ]];then
-  cd compose
+  [[ -d compose ]] && cd compose
   docker compose -f docker-network.yml -f docker-compose.yml -p $PROJECT up -d
 fi
 
 # Stop docker network
 if [[ $opt == "-x" ]];then
-  cd compose
+  [[ -d compose ]] && cd compose
   docker compose -f docker-network.yml -f docker-compose.yml -p $PROJECT stop
 fi
 

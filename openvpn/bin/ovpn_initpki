@@ -31,6 +31,7 @@ dd if=/dev/urandom of=$EASYRSA_PKI/.rnd bs=256 count=1
 easyrsa build-ca $nopass
 
 easyrsa gen-dh
+
 openvpn --genkey --secret $EASYRSA_PKI/ta.key
 
 # Was nice to autoset, but probably a bad idea in practice, users should
@@ -44,7 +45,8 @@ openvpn --genkey --secret $EASYRSA_PKI/ta.key
 #fi
 
 # For a server key with a password, manually init; this is autopilot
-easyrsa build-server-full "$OVPN_CN" nopass
+easyrsa --batch build-server-full "$OVPN_CN" nopass
 
 # Generate the CRL for client/server certificates revocation.
-easyrsa gen-crl
+
+easyrsa --batch gen-crl

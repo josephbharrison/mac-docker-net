@@ -13,9 +13,9 @@ crl_dir		= $dir			# Where the issued crl are kept
 database	= $dir/index.txt	# database index file.
 new_certs_dir	= $dir/certs_by_serial	# default place for new certs.
 
-certificate	= $dir/ca.crt	 	# The CA certificate
-serial		= $dir/serial 		# The current serial number
-crl		= $dir/crl.pem 		# The current CRL
+certificate	= $dir/ca.crt		# The CA certificate
+serial		= $dir/serial		# The current serial number
+crl		= $dir/crl.pem		# The current CRL
 private_key	= $dir/private/ca.key	# The private key
 RANDFILE	= $dir/.rand		# private random number file
 
@@ -31,6 +31,9 @@ crl_extensions	= crl_ext
 default_days	= $ENV::EASYRSA_CERT_EXPIRE	# how long to certify for
 default_crl_days	= $ENV::EASYRSA_CRL_DAYS	# how long before next CRL
 default_md	= $ENV::EASYRSA_DIGEST		# use public key default MD
+
+# Note: preserve=no|yes, does nothing for EasyRSA.
+# Use sign-req command option 'preserve' instead.
 preserve	= no			# keep passed DN ordering
 
 # This allows to renew certificates which have not been revoked
@@ -49,15 +52,15 @@ localityName		= optional
 organizationName	= optional
 organizationalUnitName	= optional
 commonName		= supplied
-name			= optional
 emailAddress		= optional
+serialNumber	= optional
 
 ####################################################################
 # Easy-RSA request handling
 # We key off $DN_MODE to determine how to format the DN
 [ req ]
 default_bits		= $ENV::EASYRSA_KEY_SIZE
-default_keyfile 	= privkey.pem
+default_keyfile	= privkey.pem
 default_md		= $ENV::EASYRSA_DIGEST
 distinguished_name	= $ENV::EASYRSA_DN
 x509_extensions		= easyrsa_ca	# The extensions to add to the self signed cert
@@ -100,6 +103,9 @@ commonName_default		= $ENV::EASYRSA_REQ_CN
 emailAddress			= Email Address
 emailAddress_default		= $ENV::EASYRSA_REQ_EMAIL
 emailAddress_max		= 64
+
+serialNumber		= Serial-number (eg, device serial-number)
+serialNumber_default	= $ENV::EASYRSA_REQ_SERIAL
 
 ####################################################################
 # Easy-RSA cert extension handling

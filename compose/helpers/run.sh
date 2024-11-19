@@ -8,8 +8,8 @@ if [ ! -f "/local/$dest" ]; then
     rm -rf /etc/openvpn/*
     ovpn_genconfig -u tcp://localhost
     sed -i 's|^push|#push|' /etc/openvpn/openvpn.conf
-    echo localhost | ovpn_initpki nopass
-    easyrsa build-client-full host nopass
+    echo host | ovpn_initpki nopass
+    easyrsa --batch build-client-full host nopass
     ovpn_getclient host | sed '
     	s|localhost 1194|localhost 13194|;
 	s|redirect-gateway.*|route 172.16.32.0 255.255.240.0|;

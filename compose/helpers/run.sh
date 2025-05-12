@@ -17,10 +17,10 @@ if [ ! -f "/local/$dest" ]; then
 fi
 
 # Workaround for https://github.com/wojas/docker-mac-network/issues/6
-/sbin/iptables -I FORWARD 1 -i tun+ -j ACCEPT
+/usr/sbin/iptables -I FORWARD 1 -i tun+ -j ACCEPT
 
 # Workaround for MacOS Sequoia (15.x)
-/sbin/iptables -P FORWARD ACCEPT
+/usr/sbin/iptables -P FORWARD ACCEPT
 
 #### /sbin/iptables -I FORWARD 1 -i tun+ -m conntrack --ctstate NEW,RELATED,ESTABLISHED -j ACCEPT
 #### /sbin/iptables -A INPUT -i tun+ -j ACCEPT

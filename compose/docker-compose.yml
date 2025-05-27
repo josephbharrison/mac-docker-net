@@ -12,6 +12,7 @@ services:
     openvpn:
         container_name: openvpn.${PROJECT}
         image: openvpn
+        privileged: true
         volumes:
             - .:/local
             - ./config:/etc/openvpn
